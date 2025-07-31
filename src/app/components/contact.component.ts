@@ -21,27 +21,27 @@ import { FormsModule } from '@angular/forms';
             <h3 class="contact-title">Get In Touch</h3>
             
             <div class="contact-methods">
-              <a href="tel:+18645551234" class="contact-method">
+              <a href="tel:+16783868951" class="contact-method">
                 <div class="method-icon">📞</div>
                 <div class="method-info">
                   <div class="method-label">Call Us Now</div>
-                  <div class="method-value">(864) 555-1234</div>
+                  <div class="method-value">(678) 386-8951</div>
                 </div>
               </a>
               
-              <a href="sms:+18645551234" class="contact-method">
+              <a href="sms:+16783868951" class="contact-method">
                 <div class="method-icon">💬</div>
                 <div class="method-info">
                   <div class="method-label">Text Us</div>
-                  <div class="method-value">(864) 555-1234</div>
+                  <div class="method-value">(678) 386-8951</div>
                 </div>
               </a>
               
-              <a href="mailto:info@upcountrybuilding.com" class="contact-method">
+              <a href="mailto:e.garrett.lovin@gmail.com" class="contact-method">
                 <div class="method-icon">✉️</div>
                 <div class="method-info">
                   <div class="method-label">Email Us</div>
-                  <div class="method-value">info&#64;upcountrycontractors.com</div>
+                  <div class="method-value">e.garrett.lovin&#64;gmail.com</div>
                 </div>
               </a>
             </div>

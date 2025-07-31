@@ -17,15 +17,15 @@ import { CommonModule } from '@angular/common';
             in Greenville, Spartanburg, and surrounding upcountry communities
           </p>
           <div class="cta-buttons">
-            <a href="tel:+18645551234" class="cta-button primary">
+            <a href="tel:+16783868951" class="cta-button primary">
               <span class="cta-icon">📞</span>
               Call Now
             </a>
-            <a href="mailto:info@upcountryconstruction.com" class="cta-button secondary">
+            <a href="mailto:e.garrett.lovin@gmail.com" class="cta-button secondary">
               <span class="cta-icon">✉️</span>
               Email Us
             </a>
-            <a href="sms:+18645551234" class="cta-button secondary">
+            <a href="sms:+16783868951" class="cta-button secondary">
               <span class="cta-icon">💬</span>
               Text Us
             </a>

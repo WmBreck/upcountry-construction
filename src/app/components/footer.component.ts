@@ -49,13 +49,13 @@ import { CommonModule } from '@angular/common';
           <div class="footer-section">
             <h4 class="section-title">Contact Info</h4>
             <div class="contact-info">
-              <a href="tel:+18645551234" class="contact-item">
+              <a href="tel:+16783868951" class="contact-item">
                 <span class="contact-icon">📞</span>
-                (864) 555-1234
+                (678) 386-8951
               </a>
-              <a href="mailto:info@upcountrybuilding.com" class="contact-item">
+              <a href="mailto:e.garrett.lovin@gmail.com" class="contact-item">
                 <span class="contact-icon">✉️</span>
-                info&#64;upcountrycontractors.com
+                e.garrett.lovin&#64;gmail.com
               </a>
               <div class="contact-item">
                 <span class="contact-icon">📍</span>
