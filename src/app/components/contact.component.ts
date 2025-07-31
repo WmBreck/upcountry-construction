@@ -594,7 +594,7 @@ export class ContactComponent {
   }
 
   private generateStaticSuggestion(serviceType: string, message: string): string {
-    const suggestions = {
+    const suggestions: { [key: string]: string } = {
       kitchen: `Based on your kitchen project, consider including these details in your description:
 
 • Current kitchen layout and size (approximate square footage)
