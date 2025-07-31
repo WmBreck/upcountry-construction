@@ -239,7 +239,7 @@ export class ServicesComponent {
       features: ['Full Renovation', 'Structural Work', 'Modern Updates', 'Energy Efficiency']
     },
     {
-      icon: 'https://images.pexels.com/photos/5691659/pexels-photo-5691659.jpeg?auto=compress&cs=tinysrgb&w=300&h=200',
+      icon: 'https://images.pexels.com/photos/5025639/pexels-photo-5025639.jpeg?auto=compress&cs=tinysrgb&w=300&h=200',
       title: 'Home Repairs',
       description: 'Professional repair services to fix and maintain your home, from minor fixes to major repairs.',
       features: ['Plumbing Repairs', 'Electrical Work', 'Drywall Fixes', 'Emergency Service']
