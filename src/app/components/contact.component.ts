@@ -575,6 +575,7 @@ export class ContactComponent {
 
   async getAIAssistance() {
     if (!this.formData.message.trim()) {
+     alert('Please enter some project details first before using AI assistance.');
       return;
     }
 
@@ -582,9 +583,11 @@ export class ContactComponent {
     this.aiSuggestion = '';
 
     try {
-      // For now, provide a helpful static suggestion based on the service type
-      const serviceType = this.formData.service || 'general';
-      this.aiSuggestion = this.generateStaticSuggestion(serviceType, this.formData.message);
+     // Add a small delay to simulate processing
+     await new Promise(resolve => setTimeout(resolve, 1000));
+     
+     const serviceType = this.formData.service || 'default';
+     this.aiSuggestion = this.generateStaticSuggestion(serviceType, this.formData.message);
     } catch (error) {
       console.error('AI assistance error:', error);
       this.aiSuggestion = 'Sorry, there was an error getting AI assistance. Please try again later.';
