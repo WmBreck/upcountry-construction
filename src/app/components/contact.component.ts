@@ -22,107 +22,19 @@ class ProjectDescriptionBuilder {
       this.messages.push({ role: "user", content: userResponse });
     }
 
-    // Call Edge Function (fallback to static suggestions for now)
-    try {
-      const response = await fetch('/project-description-builder', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ messages: this.messages })
-      });
+    // Call Edge Function
+    const response = await fetch('/project-description-builder', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ messages: this.messages })
+    });
 
-      if (response.ok) {
-        const data = await response.json();
-        // Add AI's response to messages
-        this.messages.push({ role: "assistant", content: data.response });
-        return data.response;
-      }
-    } catch (error) {
-      console.log('Edge function not available, using fallback');
-    }
-
-    // Fallback to static suggestions
-    return this.generateFallbackSuggestion(userResponse);
-  }
-
-  generateFallbackSuggestion(userInput: string) {
-    const suggestions = {
-      kitchen: `Based on your kitchen project, consider including these details:
-
-• Current kitchen layout and size (approximate square footage)
-• Desired style (modern, traditional, farmhouse, etc.)
-• Specific features you want (island, pantry, breakfast nook)
-• Appliance preferences and any existing appliances to keep
-• Budget range for the project
-• Timeline preferences
-• Any structural changes needed (removing walls, adding windows)
-
-This will help us provide you with the most accurate estimate for your kitchen remodel.`,
-      
-      bathroom: `For your bathroom renovation, please include:
-
-• Bathroom size and current layout
-• Desired features (walk-in shower, soaking tub, double vanity)
-• Style preferences (spa-like, modern, classic)
-• Any accessibility needs
-• Plumbing or electrical updates needed
-• Ventilation requirements
-• Budget and timeline expectations
-
-These details will help us create the perfect bathroom space for your needs.`,
-      
-      addition: `For your home addition project, consider mentioning:
-
-• Type of addition (bedroom, family room, second story, etc.)
-• Approximate size needed
-• Purpose and how you'll use the space
-• Integration with existing home style
-• Foundation and structural requirements
-• Utilities needed (electrical, plumbing, HVAC)
-• Local permit considerations
-• Budget range and timeline
-
-This information helps us plan an addition that seamlessly blends with your home.`,
-      
-      outdoor: `For your outdoor living project, include:
-
-• Type of outdoor space (deck, patio, outdoor kitchen, pergola)
-• Size and location on your property
-• Materials preferences (wood, composite, stone, concrete)
-• Features desired (fire pit, built-in seating, lighting)
-• Drainage and grading considerations
-• Connection to existing home
-• Entertainment and usage plans
-• Weather protection needs
-
-These details help us create the perfect outdoor retreat for your family.`,
-      
-      default: `To help us provide the best estimate for your project, consider including:
-
-• Project scope and goals
-• Approximate size or area involved
-• Style preferences and inspiration
-• Budget range you're comfortable with
-• Desired timeline for completion
-• Any specific materials or features you want
-• Challenges or constraints we should know about
-• How you plan to use the finished space
-
-The more details you provide, the more accurate our estimate will be.`
-    };
-
-    // Simple keyword matching for service type detection
-    const input = userInput.toLowerCase();
-    if (input.includes('kitchen') || input.includes('cabinet') || input.includes('countertop')) {
-      return suggestions.kitchen;
-    } else if (input.includes('bathroom') || input.includes('shower') || input.includes('vanity')) {
-      return suggestions.bathroom;
-    } else if (input.includes('addition') || input.includes('room') || input.includes('expand')) {
-      return suggestions.addition;
-    } else if (input.includes('deck') || input.includes('patio') || input.includes('outdoor')) {
-      return suggestions.outdoor;
-    }
+    const data = await response.json();
     
-    return suggestions.default;
+    // Add AI's response to messages
+    this.messages.push({ role: "assistant", content: data.response });
+
+    return data.response;
   }
 }
 
