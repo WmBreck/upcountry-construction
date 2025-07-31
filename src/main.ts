@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
+import { HeaderComponent } from './app/components/header.component';
 import { HeroComponent } from './app/components/hero.component';
 import { ServicesComponent } from './app/components/services.component';
 import { ContactComponent } from './app/components/contact.component';
@@ -10,6 +11,7 @@ import { StickyCTAComponent } from './app/components/sticky-cta.component';
   selector: 'app-root',
   standalone: true,
   imports: [
+    HeaderComponent,
     HeroComponent,
     ServicesComponent,
     ContactComponent,
@@ -18,6 +20,7 @@ import { StickyCTAComponent } from './app/components/sticky-cta.component';
   ],
   template: `
     <div class="app">
+      <app-header></app-header>
       <app-hero></app-hero>
       <app-services></app-services>
       <app-contact></app-contact>

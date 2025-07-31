@@ -10,7 +10,6 @@ import { CommonModule } from '@angular/common';
       <div class="hero-background"></div>
       <div class="hero-content">
         <div class="glass-panel hero-panel">
-          <div class="business-name">Upcountry Contractors</div>
           <h1 class="hero-title">Transform Your Upcountry Home Today</h1>
           <p class="hero-subtitle">
             Expert construction & remodeling services with local expertise 
@@ -110,16 +109,6 @@ import { CommonModule } from '@angular/common';
     .hero-panel {
       padding: 3rem;
       animation: fadeInUp 1s ease-out;
-    }
-
-    .business-name {
-      font-size: 1.2rem;
-      font-weight: 600;
-      color: rgba(255, 255, 255, 0.9);
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      margin-bottom: 1rem;
-      text-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
     }
 
     .hero-title {
