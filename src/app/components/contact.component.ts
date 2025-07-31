@@ -659,7 +659,7 @@ These details help us create the perfect outdoor retreat for your family.`,
 The more details you provide, the more accurate our estimate will be.`
     };
 
-    return suggestions[serviceType] || suggestions.default;
+    return suggestions[serviceType] || suggestions['default'];
   }
   useSuggestion() {
     if (this.aiSuggestion) {
