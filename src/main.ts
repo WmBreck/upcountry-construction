@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
+import { provideHttpClient } from '@angular/common/http';
 import { HeaderComponent } from './app/components/header.component';
 import { HeroComponent } from './app/components/hero.component';
 import { ServicesComponent } from './app/components/services.component';

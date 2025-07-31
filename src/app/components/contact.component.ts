@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { FirebaseService } from '../services/firebase.service';
 
 @Component({
   selector: 'app-contact',
@@ -439,7 +440,7 @@ import { FormsModule } from '@angular/forms';
   `]
 })
 export class ContactComponent {
-  constructor(private http: HttpClient) {}
+  constructor(private firebaseService: FirebaseService) {}
 
   formData = {
     name: '',
@@ -476,15 +477,12 @@ export class ContactComponent {
     this.aiSuggestion = '';
 
     try {
-      const response = await this.http.post<{suggestion: string, success: boolean}>(
-        '/functions/v1/project-assistant',
-        {
-          userInput: this.formData.message,
-          serviceType: this.formData.service
-        }
-      ).toPromise();
+      const response = await this.firebaseService.getProjectAssistance(
+        this.formData.message,
+        this.formData.service
+      );
 
-      if (response?.success && response.suggestion) {
+      if (response.success && response.suggestion) {
         this.aiSuggestion = response.suggestion;
       } else {
         this.aiSuggestion = 'Sorry, I couldn\'t generate a suggestion at this time. Please try again.';
