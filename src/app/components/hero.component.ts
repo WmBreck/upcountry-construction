@@ -13,7 +13,7 @@ import { CommonModule } from '@angular/common';
           <div class="business-name">Upcountry Contractors</div>
           <h1 class="hero-title">Transform Your Upcountry Home Today</h1>
           <p class="hero-subtitle">
-            Expert construction & remodeling services with 15+ years of local expertise 
+            Expert construction & remodeling services with local expertise 
             in Greenville, Spartanburg, and surrounding upcountry communities
           </p>
           <div class="cta-buttons">
