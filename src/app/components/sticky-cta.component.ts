@@ -17,7 +17,7 @@ import { CommonModule } from '@angular/common';
             <span class="btn-icon">📞</span>
             Call
           </a>
-          <a href="mailto:info@upcountryconstruction.com" class="cta-btn email">
+          <a href="mailto:info@upcountrycontractors.com" class="cta-btn email">
             <span class="btn-icon">✉️</span>
             Email
           </a>
