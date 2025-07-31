@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
       <div class="hero-background"></div>
       <div class="hero-content">
         <div class="glass-panel hero-panel">
-          <div class="business-name">Upcountry Construction & Remodeling</div>
+          <div class="business-name">Upcountry Contractors</div>
           <h1 class="hero-title">Transform Your Upcountry Home Today</h1>
           <p class="hero-subtitle">
             Expert construction & remodeling services with 15+ years of local expertise 

@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
       <div class="container">
         <div class="footer-content">
           <div class="footer-section">
-            <h3 class="footer-title">Upcountry Construction & Remodeling</h3>
+            <h3 class="footer-title">Upcountry Contractors</h3>
             <p class="footer-description">
               Transforming homes across upcountry South Carolina with quality craftsmanship 
               and exceptional service for over 15 years.
@@ -55,7 +55,7 @@ import { CommonModule } from '@angular/common';
               </a>
               <a href="mailto:info@upcountrybuilding.com" class="contact-item">
                 <span class="contact-icon">✉️</span>
-                info&#64;upcountryconstruction.com
+                info&#64;upcountrycontractors.com
               </a>
               <div class="contact-item">
                 <span class="contact-icon">📍</span>
@@ -72,7 +72,7 @@ import { CommonModule } from '@angular/common';
         <div class="footer-bottom">
           <div class="footer-bottom-content">
             <p class="copyright">
-              © 2025 Upcountry Construction & Remodeling. All rights reserved.
+              © 2025 Upcountry Contractors. All rights reserved.
             </p>
             <div class="footer-badges">
               <span class="badge">Licensed & Insured</span>

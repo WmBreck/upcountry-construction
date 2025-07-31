@@ -41,7 +41,7 @@ import { FormsModule } from '@angular/forms';
                 <div class="method-icon">✉️</div>
                 <div class="method-info">
                   <div class="method-label">Email Us</div>
-                  <div class="method-value">info&#64;upcountryconstruction.com</div>
+                  <div class="method-value">info&#64;upcountrycontractors.com</div>
                 </div>
               </a>
             </div>
