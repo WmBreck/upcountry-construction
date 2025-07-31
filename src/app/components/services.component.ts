@@ -227,7 +227,7 @@ export class ServicesComponent {
       features: ['Room Additions', 'Second Stories', 'Sunrooms', 'Garages']
     },
     {
-      icon: 'https://images.pexels.com/photos/1776574/pexels-photo-1776574.jpeg?auto=compress&cs=tinysrgb&w=300&h=200',
+      icon: 'https://images.pexels.com/photos/1129413/pexels-photo-1129413.jpeg?auto=compress&cs=tinysrgb&w=300&h=200',
       title: 'Outdoor Living',
       description: 'Extend your home outdoors with decks, patios, and outdoor kitchens perfect for entertaining.',
       features: ['Custom Decks', 'Outdoor Kitchens', 'Fire Features', 'Landscaping']
