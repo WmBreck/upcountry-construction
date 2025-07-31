@@ -22,4 +22,6 @@
     "@angular/build": "^20.0.0",
     "@angular/cli": "^20.0.0",
     "@angular/compiler-cli": "^20.0.0"
+  }
+}
 }
