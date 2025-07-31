@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { FirebaseService } from '../services/firebase.service';
+import { SupabaseService } from '../services/supabase.service';
 
 @Component({
   selector: 'app-contact',
@@ -120,6 +120,7 @@ import { FirebaseService } from '../services/firebase.service';
             
             <div class="form-group">
               <label for="message">Project Details</label>
+              <div class="textarea-container">
               <textarea 
                 id="message" 
                 name="message" 
@@ -127,6 +128,26 @@ import { FirebaseService } from '../services/firebase.service';
                 rows="4" 
                 class="form-input"
                 placeholder="Tell us about your project..."></textarea>
+                <button 
+                  type="button" 
+                  class="ai-assist-btn" 
+                  (click)="getAIAssistance()"
+                  [disabled]="!formData.message.trim() || isLoadingAI">
+                  <span class="ai-icon">🤖</span>
+                  {{ isLoadingAI ? 'Getting AI Help...' : 'AI Assist' }}
+                </button>
+              </div>
+              
+              <div class="ai-suggestion" *ngIf="aiSuggestion">
+                <div class="suggestion-header">
+                  <span class="suggestion-icon">💡</span>
+                  <strong>AI Suggestion:</strong>
+                </div>
+                <div class="suggestion-content">{{ aiSuggestion }}</div>
+                <button type="button" class="use-suggestion-btn" (click)="useSuggestion()">
+                  Use This Suggestion
+                </button>
+              </div>
             </div>
             
             <button type="submit" class="submit-button" [disabled]="!contactForm.form.valid">
@@ -402,6 +423,90 @@ import { FirebaseService } from '../services/firebase.service';
       line-height: 1.4;
     }
 
+    .textarea-container {
+      position: relative;
+    }
+
+    .ai-assist-btn {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: white;
+      border: none;
+      border-radius: 20px;
+      padding: 0.5rem 1rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .ai-assist-btn:hover:not(:disabled) {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .ai-assist-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .ai-icon {
+      font-size: 1rem;
+    }
+
+    .ai-suggestion {
+      margin-top: 1rem;
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 10px;
+      padding: 1rem;
+      backdrop-filter: blur(10px);
+    }
+
+    .suggestion-header {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.8rem;
+      color: white;
+      font-size: 0.95rem;
+    }
+
+    .suggestion-icon {
+      font-size: 1.2rem;
+    }
+
+    .suggestion-content {
+      color: rgba(255, 255, 255, 0.9);
+      line-height: 1.5;
+      margin-bottom: 1rem;
+      font-size: 0.9rem;
+      white-space: pre-wrap;
+    }
+
+    .use-suggestion-btn {
+      background: linear-gradient(135deg, #3b82f6, #2563eb);
+      color: white;
+      border: none;
+      border-radius: 20px;
+      padding: 0.5rem 1rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .use-suggestion-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
     @keyframes gradientShift {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
@@ -440,7 +545,7 @@ import { FirebaseService } from '../services/firebase.service';
   `]
 })
 export class ContactComponent {
-  constructor(private firebaseService: FirebaseService) {}
+  constructor(private supabaseService: SupabaseService) {}
 
   formData = {
     name: '',
@@ -477,7 +582,7 @@ export class ContactComponent {
     this.aiSuggestion = '';
 
     try {
-      const response = await this.firebaseService.getProjectAssistance(
+      const response = await this.supabaseService.getProjectAssistance(
         this.formData.message,
         this.formData.service
       );

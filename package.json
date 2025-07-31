@@ -4,10 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
-    "firebase:serve": "firebase emulators:start --only functions",
-    "firebase:deploy": "firebase deploy --only functions",
-    "firebase:build": "cd functions && npm run build"
+    "build": "ng build"
   },
   "dependencies": {
     "@angular/animations": "^20.0.0",
@@ -24,7 +21,6 @@
   "devDependencies": {
     "@angular/build": "^20.0.0",
     "@angular/cli": "^20.0.0",
-    "@angular/compiler-cli": "^20.0.0",
-    "typescript": "^5.8.2"
+    "@angular/compiler-cli": "^20.0.0"
   }
 }
