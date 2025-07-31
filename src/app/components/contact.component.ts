@@ -439,6 +439,8 @@ import { FormsModule } from '@angular/forms';
   `]
 })
 export class ContactComponent {
+  constructor(private http: HttpClient) {}
+
   formData = {
     name: '',
     phone: '',
@@ -446,6 +448,9 @@ export class ContactComponent {
     service: '',
     message: ''
   };
+
+  isLoadingAI = false;
+  aiSuggestion = '';
 
   onSubmit() {
     console.log('Form submitted:', this.formData);
@@ -460,5 +465,42 @@ export class ContactComponent {
       service: '',
       message: ''
     };
+  }
+
+  async getAIAssistance() {
+    if (!this.formData.message.trim()) {
+      return;
+    }
+
+    this.isLoadingAI = true;
+    this.aiSuggestion = '';
+
+    try {
+      const response = await this.http.post<{suggestion: string, success: boolean}>(
+        '/functions/v1/project-assistant',
+        {
+          userInput: this.formData.message,
+          serviceType: this.formData.service
+        }
+      ).toPromise();
+
+      if (response?.success && response.suggestion) {
+        this.aiSuggestion = response.suggestion;
+      } else {
+        this.aiSuggestion = 'Sorry, I couldn\'t generate a suggestion at this time. Please try again.';
+      }
+    } catch (error) {
+      console.error('AI assistance error:', error);
+      this.aiSuggestion = 'Sorry, there was an error getting AI assistance. Please try again later.';
+    } finally {
+      this.isLoadingAI = false;
+    }
+  }
+
+  useSuggestion() {
+    if (this.aiSuggestion) {
+      this.formData.message = this.aiSuggestion;
+      this.aiSuggestion = '';
+    }
   }
 }

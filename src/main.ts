@@ -37,4 +37,8 @@ import { StickyCTAComponent } from './app/components/sticky-cta.component';
 })
 export class App {}
 
-bootstrapApplication(App);
+bootstrapApplication(App, {
+  providers: [
+    provideHttpClient()
+  ]
+});
