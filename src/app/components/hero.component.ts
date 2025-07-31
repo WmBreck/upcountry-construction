@@ -64,7 +64,7 @@ import { CommonModule } from '@angular/common';
         #10b981 100%);
       background-size: 400% 400%;
       animation: gradientShift 15s ease infinite;
-      background-image: url('https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg?auto=compress&cs=tinysrgb&w=1920');
+      background-image: url('src/assets/greenville-sc-4616896_1280.jpg');
       background-size: cover;
       background-position: center;
       background-blend-mode: overlay;
