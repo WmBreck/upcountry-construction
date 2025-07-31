@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 
 // Recommended client-side interaction pattern
 class ProjectDescriptionBuilder {
+  private messages: Array<{ role: string; content: string }>;
+
   constructor() {
     this.messages = [
       {
@@ -13,7 +15,7 @@ class ProjectDescriptionBuilder {
     ];
   }
 
-  async nextStep(userResponse) {
+  async nextStep(userResponse: string) {
     // Add user's response to messages
     if (userResponse) {
       this.messages.push({ role: "user", content: userResponse });
