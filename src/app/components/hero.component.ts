@@ -36,20 +36,6 @@ import { CommonModule } from '@angular/common';
           </div>
         </div>
       </div>
-      <div class="hero-stats">
-        <div class="stat-item glass-panel">
-          <div class="stat-number">150+</div>
-          <div class="stat-label">Homes Remodeled</div>
-        </div>
-        <div class="stat-item glass-panel">
-          <div class="stat-number">98%</div>
-          <div class="stat-label">Customer Satisfaction</div>
-        </div>
-        <div class="stat-item glass-panel">
-          <div class="stat-number">15+</div>
-          <div class="stat-label">Years Experience</div>
-        </div>
-      </div>
     </section>
   `,
   styles: [`
@@ -108,7 +94,6 @@ import { CommonModule } from '@angular/common';
       z-index: 2;
       text-align: center;
       max-width: 800px;
-      margin-bottom: 3rem;
     }
 
     .glass-panel {
@@ -202,44 +187,6 @@ import { CommonModule } from '@angular/common';
       font-size: 1.2rem;
     }
 
-    .hero-stats {
-      display: flex;
-      gap: 2rem;
-      position: relative;
-      z-index: 2;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
-    .stat-item {
-      padding: 1.5rem 2rem;
-      text-align: center;
-      min-width: 150px;
-      animation: fadeInUp 1s ease-out;
-    }
-
-    .stat-item:nth-child(2) {
-      animation-delay: 0.2s;
-    }
-
-    .stat-item:nth-child(3) {
-      animation-delay: 0.4s;
-    }
-
-    .stat-number {
-      font-size: 2.5rem;
-      font-weight: 800;
-      color: white;
-      margin-bottom: 0.5rem;
-      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-    }
-
-    .stat-label {
-      font-size: 1rem;
-      color: rgba(255, 255, 255, 0.9);
-      font-weight: 500;
-    }
-
     @keyframes fadeInUp {
       from {
         opacity: 0;
@@ -273,19 +220,6 @@ import { CommonModule } from '@angular/common';
         width: 100%;
         max-width: 250px;
         justify-content: center;
-      }
-
-      .hero-stats {
-        gap: 1rem;
-      }
-
-      .stat-item {
-        min-width: 120px;
-        padding: 1rem 1.5rem;
-      }
-
-      .stat-number {
-        font-size: 2rem;
       }
     }
   `]
