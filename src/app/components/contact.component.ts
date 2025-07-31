@@ -582,16 +582,9 @@ export class ContactComponent {
     this.aiSuggestion = '';
 
     try {
-      const response = await this.supabaseService.getProjectAssistance(
-        this.formData.message,
-        this.formData.service
-      );
-
-      if (response.success && response.suggestion) {
-        this.aiSuggestion = response.suggestion;
-      } else {
-        this.aiSuggestion = 'Sorry, I couldn\'t generate a suggestion at this time. Please try again.';
-      }
+      // For now, provide a helpful static suggestion based on the service type
+      const serviceType = this.formData.service || 'general';
+      this.aiSuggestion = this.generateStaticSuggestion(serviceType, this.formData.message);
     } catch (error) {
       console.error('AI assistance error:', error);
       this.aiSuggestion = 'Sorry, there was an error getting AI assistance. Please try again later.';
@@ -600,6 +593,74 @@ export class ContactComponent {
     }
   }
 
+  private generateStaticSuggestion(serviceType: string, message: string): string {
+    const suggestions = {
+      kitchen: `Based on your kitchen project, consider including these details in your description:
+
+• Current kitchen layout and size (approximate square footage)
+• Desired style (modern, traditional, farmhouse, etc.)
+• Specific features you want (island, pantry, breakfast nook)
+• Appliance preferences and any existing appliances to keep
+• Budget range for the project
+• Timeline preferences
+• Any structural changes needed (removing walls, adding windows)
+
+This will help us provide you with the most accurate estimate for your kitchen remodel.`,
+      
+      bathroom: `For your bathroom renovation, please include:
+
+• Bathroom size and current layout
+• Desired features (walk-in shower, soaking tub, double vanity)
+• Style preferences (spa-like, modern, classic)
+• Any accessibility needs
+• Plumbing or electrical updates needed
+• Ventilation requirements
+• Budget and timeline expectations
+
+These details will help us create the perfect bathroom space for your needs.`,
+      
+      addition: `For your home addition project, consider mentioning:
+
+• Type of addition (bedroom, family room, second story, etc.)
+• Approximate size needed
+• Purpose and how you'll use the space
+• Integration with existing home style
+• Foundation and structural requirements
+• Utilities needed (electrical, plumbing, HVAC)
+• Local permit considerations
+• Budget range and timeline
+
+This information helps us plan an addition that seamlessly blends with your home.`,
+      
+      outdoor: `For your outdoor living project, include:
+
+• Type of outdoor space (deck, patio, outdoor kitchen, pergola)
+• Size and location on your property
+• Materials preferences (wood, composite, stone, concrete)
+• Features desired (fire pit, built-in seating, lighting)
+• Drainage and grading considerations
+• Connection to existing home
+• Entertainment and usage plans
+• Weather protection needs
+
+These details help us create the perfect outdoor retreat for your family.`,
+      
+      default: `To help us provide the best estimate for your project, consider including:
+
+• Project scope and goals
+• Approximate size or area involved
+• Style preferences and inspiration
+• Budget range you're comfortable with
+• Desired timeline for completion
+• Any specific materials or features you want
+• Challenges or constraints we should know about
+• How you plan to use the finished space
+
+The more details you provide, the more accurate our estimate will be.`
+    };
+
+    return suggestions[serviceType] || suggestions.default;
+  }
   useSuggestion() {
     if (this.aiSuggestion) {
       this.formData.message = this.aiSuggestion;
