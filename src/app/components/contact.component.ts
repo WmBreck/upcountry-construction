@@ -22,19 +22,28 @@ class ProjectDescriptionBuilder {
       this.messages.push({ role: "user", content: userResponse });
     }
 
-    // Call Edge Function
-    const response = await fetch('/project-description-builder', {
+    // Call existing Supabase Edge Function
+    const supabaseUrl = 'https://cmdegjiluyuqcbpsoclk.supabase.co';
+    const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNtZGVnamlsdXl1cWNicHNvY2xrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQwMDEzMTIsImV4cCI6MjA2OTU3NzMxMn0.mpNl9vaoAtgdcZdbXC5Xp4Zd21QjuzdkdTJ7HbjDp70';
+    
+    const response = await fetch(`${supabaseUrl}/functions/v1/project-assistant`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ messages: this.messages })
+      headers: { 
+        'Authorization': `Bearer ${supabaseAnonKey}`,
+        'Content-Type': 'application/json' 
+      },
+      body: JSON.stringify({ 
+        userInput: userResponse,
+        serviceType: 'general'
+      })
     });
 
     const data = await response.json();
     
     // Add AI's response to messages
-    this.messages.push({ role: "assistant", content: data.response });
+    this.messages.push({ role: "assistant", content: data.suggestion });
 
-    return data.response;
+    return data.suggestion;
   }
 }
 
