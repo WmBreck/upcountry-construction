@@ -670,6 +670,8 @@ The more details you provide, the more accurate our estimate will be.`
 export class ContactComponent {
   constructor(private supabaseService: SupabaseService) {}
 
+  projectBuilder = new ProjectDescriptionBuilder();
+
   formData = {
     name: '',
     phone: '',
