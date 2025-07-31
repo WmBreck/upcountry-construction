@@ -1,80 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Upcountry Construction & Remodeling | Expert Construction Services in South Carolina</title>
-    <!-- ... (head content remains unchanged) ... -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Upcountry Construction & Remodeling</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <!-- Hero Section -->
-    <!-- ... (unchanged content) ... -->
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <h1>Transform Your Upcountry Home Today</h1>
+    <p>
+      Expert construction & remodeling services with 15+ years of experience in
+      Greenville, Spartanburg, and surrounding communities.
+    </p>
+    <div>
+      <a href="tel:+18645551234">📞 Call Now</a>
+      <a href="mailto:info@upcountryconstruction.com">✉️ Email Us</a>
+      <a href="sms:+18645551234">💬 Text Us</a>
+    </div>
+  </section>
 
-    <!-- Services Section -->
-    <!-- ... (unchanged content) ... -->
+  <!-- Services Section -->
+  <section class="services-section">
+    <h2>Our Expert Services</h2>
+    <ul>
+      <li>🏠 Kitchen Remodeling</li>
+      <li>🛁 Bathroom Renovation</li>
+      <li>🏗️ Home Additions</li>
+      <li>🌿 Outdoor Living Spaces</li>
+      <li>🔨 Whole Home Renovation</li>
+      <li>🔧 Home Repairs</li>
+    </ul>
+  </section>
 
-    <!-- Gallery Section -->
-    <!-- Gallery section removed as requested -->
+  <!-- Contact Section -->
+  <section id="contact" class="contact-section">
+    <h2>Get Your Free Estimate Today</h2>
+    <p>Contact us for a free consultation and estimate.</p>
+    <form onsubmit="handleSubmit(event)">
+      <label>
+        Full Name *
+        <input type="text" name="name" required />
+      </label>
+      <label>
+        Phone Number *
+        <input type="tel" name="phone" required />
+      </label>
+      <label>
+        Email
+        <input type="email" name="email" />
+      </label>
+      <label>
+        Service Needed
+        <select name="service">
+          <option value="">Select one...</option>
+          <option value="kitchen">Kitchen Remodeling</option>
+          <option value="bathroom">Bathroom Renovation</option>
+          <option value="addition">Home Addition</option>
+          <option value="outdoor">Outdoor Living</option>
+          <option value="whole-home">Whole Home Renovation</option>
+          <option value="other">Other</option>
+        </select>
+      </label>
+      <label>
+        Project Details
+        <textarea name="message" rows="4"></textarea>
+      </label>
+      <button type="submit">🚀 Get My Free Estimate</button>
+    </form>
+  </section>
 
-    <!-- Testimonials Section -->
-    <!-- Testimonials section removed as requested -->
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2025 Upcountry Construction & Remodeling. All rights reserved.</p>
+    <p>📍 Serving Upcountry South Carolina</p>
+    <p>📞 (864) 555-1234 | ✉️ info@upcountryconstruction.com</p>
+  </footer>
 
-    <!-- Contact Section -->
-    <!-- ... (unchanged content) ... -->
-
-    <!-- Footer -->
-    <!-- ... (unchanged content) ... -->
-
-    <!-- Sticky CTA -->
-    <!-- ... (unchanged content) ... -->
-
-    <script>
-        // Smooth scrolling to contact section
-        function scrollToContact() {
-            const contactSection = document.getElementById('contact');
-            if (contactSection) {
-                contactSection.scrollIntoView({ behavior: 'smooth' });
-            }
-        }
-
-        // Sticky CTA visibility
-        window.addEventListener('scroll', function() {
-            const stickyCta = document.getElementById('stickyCta');
-            const scrollPosition = window.pageYOffset;
-            const windowHeight = window.innerHeight;
-
-            // Show sticky CTA after scrolling past the hero section
-            if (scrollPosition > windowHeight * 0.8) {
-                stickyCta.classList.add('visible');
-            } else {
-                stickyCta.classList.remove('visible');
-            }
-        });
-
-        // Form submission handler
-        function handleSubmit(event) {
-            event.preventDefault();
-
-            // Get form data
-            const formData = new FormData(event.target);
-            const data = Object.fromEntries(formData);
-
-            console.log('Form submitted:', data);
-
-            // Show success message
-            alert('Thank you for your inquiry! We\'ll contact you within 24 hours to schedule your free consultation.');
-
-            // Reset form
-            event.target.reset();
-        }
-
-        // Add loading animation to page
-        window.addEventListener('load', function() {
-            document.body.style.opacity = '0';
-            document.body.style.transition = 'opacity 0.5s ease';
-
-            setTimeout(function() {
-                document.body.style.opacity = '1';
-            }, 100);
-        });
-    </script>
+  <script>
+    function handleSubmit(event) {
+      event.preventDefault();
+      alert("Thank you! We'll be in touch shortly.");
+      event.target.reset();
+    }
+  </script>
 </body>
 </html>
