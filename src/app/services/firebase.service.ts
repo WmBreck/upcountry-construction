@@ -3,13 +3,13 @@ import { initializeApp } from 'firebase/app';
 import { getFunctions, httpsCallable } from 'firebase/functions';
 
 const firebaseConfig = {
-  // You'll need to add your Firebase config here
-  apiKey: "your-api-key",
-  authDomain: "your-project.firebaseapp.com",
-  projectId: "your-project-id",
-  storageBucket: "your-project.appspot.com",
-  messagingSenderId: "123456789",
-  appId: "your-app-id"
+  // Replace these with your actual Firebase config values
+  apiKey: "AIzaSyBvOkBH0ImXbtzQi5KW2lHqYK4c-MtKQOY",
+  authDomain: "upcountry-contractors.firebaseapp.com",
+  projectId: "upcountry-contractors",
+  storageBucket: "upcountry-contractors.appspot.com",
+  messagingSenderId: "123456789012",
+  appId: "1:123456789012:web:abcdef123456789012345"
 };
 
 @Injectable({
