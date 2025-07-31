@@ -18,7 +18,7 @@ import { CommonModule } from '@angular/common';
         <div class="services-grid">
           <div class="service-card glass-panel" *ngFor="let service of services; let i = index"
                [style.animation-delay]="(i * 0.1) + 's'">
-            <div class="service-icon">{{ service.icon }}</div>
+            <img [src]="service.icon" [alt]="service.title" class="service-icon">
             <h3 class="service-title">{{ service.title }}</h3>
             <p class="service-description">{{ service.description }}</p>
             <div class="service-features">
@@ -209,37 +209,37 @@ import { CommonModule } from '@angular/common';
 export class ServicesComponent {
   services = [
     {
-      icon: '🏠',
+      icon: 'https://images.pexels.com/photos/2724749/pexels-photo-2724749.jpeg?auto=compress&cs=tinysrgb&w=300&h=200',
       title: 'Kitchen Remodeling',
       description: 'Transform your kitchen into the heart of your home with custom cabinets, countertops, and modern appliances.',
       features: ['Custom Cabinets', 'Granite Counters', 'Modern Appliances', 'Open Concepts']
     },
     {
-      icon: '🛁',
+      icon: 'https://images.pexels.com/photos/1454804/pexels-photo-1454804.jpeg?auto=compress&cs=tinysrgb&w=300&h=200',
       title: 'Bathroom Renovation',
       description: 'Create your personal spa with luxurious fixtures, tile work, and efficient layouts that maximize space.',
       features: ['Luxury Fixtures', 'Custom Tile', 'Walk-in Showers', 'Vanity Design']
     },
     {
-      icon: '🏗️',
+      icon: 'https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg?auto=compress&cs=tinysrgb&w=300&h=200',
       title: 'Home Additions',
       description: 'Expand your living space with seamless additions that blend perfectly with your existing home.',
       features: ['Room Additions', 'Second Stories', 'Sunrooms', 'Garages']
     },
     {
-      icon: '🌿',
+      icon: 'https://images.pexels.com/photos/1776574/pexels-photo-1776574.jpeg?auto=compress&cs=tinysrgb&w=300&h=200',
       title: 'Outdoor Living',
       description: 'Extend your home outdoors with decks, patios, and outdoor kitchens perfect for entertaining.',
       features: ['Custom Decks', 'Outdoor Kitchens', 'Fire Features', 'Landscaping']
     },
     {
-      icon: '🔨',
+      icon: 'https://images.pexels.com/photos/1080721/pexels-photo-1080721.jpeg?auto=compress&cs=tinysrgb&w=300&h=200',
       title: 'Whole Home Renovation',
       description: 'Complete home transformations that modernize every aspect of your living space.',
       features: ['Full Renovation', 'Structural Work', 'Modern Updates', 'Energy Efficiency']
     },
     {
-      icon: '🔧',
+      icon: 'https://images.pexels.com/photos/5691659/pexels-photo-5691659.jpeg?auto=compress&cs=tinysrgb&w=300&h=200',
       title: 'Home Repairs',
       description: 'Professional repair services to fix and maintain your home, from minor fixes to major repairs.',
       features: ['Plumbing Repairs', 'Electrical Work', 'Drywall Fixes', 'Emergency Service']
