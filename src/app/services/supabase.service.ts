@@ -4,8 +4,8 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class SupabaseService {
-  private supabaseUrl = 'YOUR_SUPABASE_URL'; // Replace with your Supabase URL
-  private supabaseAnonKey = 'YOUR_SUPABASE_ANON_KEY'; // Replace with your Supabase anon key
+  private supabaseUrl = 'https://cmdegjiluyuqcbpsoclk.supabase.co; // Replace with your Supabase URL
+  private supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNtZGVnamlsdXl1cWNicHNvY2xrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQwMDEzMTIsImV4cCI6MjA2OTU3NzMxMn0.mpNl9vaoAtgdcZdbXC5Xp4Zd21QjuzdkdTJ7HbjDp70'; // Replace with your Supabase anon key
 
   async getProjectAssistance(userInput: string, serviceType?: string): Promise<{suggestion: string, success: boolean}> {
     const apiUrl = `${this.supabaseUrl}/functions/v1/project-assistant`;
