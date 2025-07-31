@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { SupabaseService } from '../services/supabase.service';
 
 // Recommended client-side interaction pattern
 class ProjectDescriptionBuilder {
@@ -43,7 +44,7 @@ class ProjectDescriptionBuilder {
     return this.generateFallbackSuggestion(userResponse);
   }
 
-  generateFallbackSuggestion(userInput) {
+  generateFallbackSuggestion(userInput: string) {
     const suggestions = {
       kitchen: `Based on your kitchen project, consider including these details:
 
