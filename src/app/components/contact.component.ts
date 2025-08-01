@@ -1,51 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { SupabaseService } from '../services/supabase.service';
-
-// Recommended client-side interaction pattern
-class ProjectDescriptionBuilder {
-  private messages: Array<{ role: string; content: string }>;
-
-  constructor() {
-    this.messages = [
-      {
-        role: "system",
-        content: "You are a Project Description Builder for Upcountry Contractors, a construction and remodeling company serving Greenville, Spartanburg, and surrounding South Carolina communities. Help homeowners clearly describe their construction and remodeling projects by providing structured project descriptions, important details to consider, clarifying questions, and realistic timeline and budget considerations for the upcountry SC market."
-      }
-    ];
-  }
-
-  async nextStep(userResponse: string) {
-    // Add user's response to messages
-    if (userResponse) {
-      this.messages.push({ role: "user", content: userResponse });
-    }
-
-    // Call existing Supabase Edge Function
-    const supabaseUrl = 'https://cmdegjiluyuqcbpsoclk.supabase.co';
-    const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNtZGVnamlsdXl1cWNicHNvY2xrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQwMDEzMTIsImV4cCI6MjA2OTU3NzMxMn0.mpNl9vaoAtgdcZdbXC5Xp4Zd21QjuzdkdTJ7HbjDp70';
-    
-    const response = await fetch(`${supabaseUrl}/functions/v1/project-assistant`, {
-      method: 'POST',
-      headers: { 
-        'Authorization': `Bearer ${supabaseAnonKey}`,
-        'Content-Type': 'application/json' 
-      },
-      body: JSON.stringify({ 
-        userInput: userResponse,
-        serviceType: 'general'
-      })
-    });
-
-    const data = await response.json();
-    
-    // Add AI's response to messages
-    this.messages.push({ role: "assistant", content: data.suggestion });
-
-    return data.suggestion;
-  }
-}
+import { FirebaseService } from '../services/firebase.service';
 
 @Component({
   selector: 'app-contact',
@@ -629,7 +585,12 @@ export class ContactComponent {
     this.aiSuggestion = '';
 
     try {
-      this.aiSuggestion = await this.projectBuilder.nextStep(this.formData.message);
+      const result = await this.firebaseService.getProjectAssistance(this.formData.message);
+      if (result.success) {
+        this.aiSuggestion = result.suggestion;
+      } else {
+        this.aiSuggestion = 'Sorry, there was an error getting AI assistance. Please try again later.';
+      }
     } catch (error) {
       console.error('AI assistance error:', error);
       this.aiSuggestion = 'Sorry, there was an error getting AI assistance. Please try again later.';
