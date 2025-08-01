@@ -68,9 +68,13 @@ Deno.serve(async (req) => {
   } catch (error) {
     console.error("Project assistant error:", error);
     return new Response(
-      JSON.stringify({ error: "Failed to get AI assistance" }),
+      JSON.stringify({ 
+        success: false,
+        error: "Failed to get AI assistance",
+        suggestion: "Thank you for your interest in our services. We're experiencing a temporary issue with our AI assistant, but we'd love to help you with your project. Please feel free to describe your project needs in the message field, and our team will get back to you with personalized recommendations and next steps."
+      }),
       { 
-        status: 500, 
+        status: 200, 
         headers: { ...corsHeaders, 'Content-Type': 'application/json' } 
       }
     )
