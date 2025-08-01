@@ -548,8 +548,6 @@ import { FirebaseService } from '../services/firebase.service';
 export class ContactComponent {
   constructor(private firebaseService: FirebaseService) {}
 
-  projectBuilder = new ProjectDescriptionBuilder();
-
   formData = {
     name: '',
     phone: '',
