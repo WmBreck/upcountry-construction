@@ -600,6 +600,12 @@ export class ContactComponent {
     }
   }
   useSuggestion() {
+    if (this.aiSuggestion) {
+      this.formData.message = this.aiSuggestion;
+      this.aiSuggestion = '';
+    }
+  }
+
   getFallbackSuggestion(message: string, serviceType: string): string {
     const input = message.toLowerCase();
     
@@ -789,10 +795,5 @@ Please provide more details about your specific project goals, and we'll help yo
 - Licensed and insured professionals
 
 We're here to help bring your vision to life!`;
-  }
-    if (this.aiSuggestion) {
-      this.formData.message = this.aiSuggestion;
-      this.aiSuggestion = '';
-    }
   }
 }
