@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { FirebaseService } from '../services/firebase.service';
+import { SupabaseService } from '../services/supabase.service';
 
 @Component({
   selector: 'app-contact',
@@ -546,7 +546,7 @@ import { FirebaseService } from '../services/firebase.service';
   `]
 })
 export class ContactComponent {
-  constructor(private firebaseService: FirebaseService) {}
+  constructor(private supabaseService: SupabaseService) {}
 
   formData = {
     name: '',
