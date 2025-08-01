@@ -584,7 +584,7 @@ export class ContactComponent {
     this.aiSuggestion = '';
 
     try {
-      const result = await this.firebaseService.getProjectAssistance(this.formData.message);
+      const result = await this.supabaseService.getProjectAssistance(this.formData.message, this.formData.service);
       if (result.success) {
         this.aiSuggestion = result.suggestion;
       } else {
