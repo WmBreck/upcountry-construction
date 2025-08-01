@@ -114,6 +114,7 @@ import { FirebaseService } from '../services/firebase.service';
                 <option value="addition">Home Addition</option>
                 <option value="outdoor">Outdoor Living</option>
                 <option value="whole-home">Whole Home Renovation</option>
+                <option value="repair">Home Repair</option>
                 <option value="other">Other</option>
               </select>
             </div>
