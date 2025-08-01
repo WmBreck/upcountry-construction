@@ -545,7 +545,7 @@ import { FirebaseService } from '../services/firebase.service';
   `]
 })
 export class ContactComponent {
-  constructor(private supabaseService: SupabaseService) {}
+  constructor(private firebaseService: FirebaseService) {}
 
   projectBuilder = new ProjectDescriptionBuilder();
 
