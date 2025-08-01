@@ -1,21 +1,19 @@
-import { serve } from "https://deno.land/std@0.168.0/http/server.ts"
-
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 }
 
-serve(async (req) => {
+Deno.serve(async (req) => {
   // Handle CORS preflight requests
   if (req.method === 'OPTIONS') {
     return new Response('ok', { headers: corsHeaders })
   }
 
   try {
-    const { userInput, serviceType } = await req.json()
+    const { userInput, serviceType, messages } = await req.json()
 
     // Validate input
-    if (!userInput || userInput.trim().length === 0) {
+    if ((!userInput || userInput.trim().length === 0) && (!messages || messages.length === 0)) {
       return new Response(
         JSON.stringify({ error: 'User input is required' }),
         { 
@@ -25,8 +23,8 @@ serve(async (req) => {
       )
     }
 
-    // Generate intelligent suggestions based on input analysis
-    const aiResponse = generateProjectSuggestion(userInput, serviceType)
+    // Generate AI-powered suggestions
+    const aiResponse = await generateAIResponse(userInput || getLatestUserMessage(messages), serviceType)
 
     return new Response(
       JSON.stringify({ 
@@ -41,7 +39,7 @@ serve(async (req) => {
   } catch (error) {
     console.error("Project assistant error:", error)
     return new Response(
-      JSON.stringify({ error: "Internal server error" }),
+      JSON.stringify({ error: "Failed to get AI assistance" }),
       { 
         status: 500, 
         headers: { ...corsHeaders, 'Content-Type': 'application/json' } 
@@ -50,7 +48,19 @@ serve(async (req) => {
   }
 })
 
-function generateProjectSuggestion(userInput: string, serviceType?: string): string {
+function getLatestUserMessage(messages: any[]): string {
+  if (!messages || messages.length === 0) return '';
+  
+  // Find the last user message
+  for (let i = messages.length - 1; i >= 0; i--) {
+    if (messages[i].role === 'user') {
+      return messages[i].content;
+    }
+  }
+  return '';
+}
+
+async function generateAIResponse(userInput: string, serviceType?: string): Promise<string> {
   const input = userInput.toLowerCase()
   
   // Kitchen remodeling suggestions
