@@ -10,7 +10,21 @@ Deno.serve(async (req) => {
   }
 
   try {
-    const { userInput, serviceType, messages } = await req.json()
+    let requestBody;
+    try {
+      requestBody = await req.json();
+    } catch (parseError) {
+      console.error("JSON parsing error:", parseError);
+      return new Response(
+        JSON.stringify({ error: 'Invalid JSON in request body' }),
+        { 
+          status: 400, 
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' } 
+        }
+      );
+    }
+
+    const { userInput, serviceType, messages } = requestBody;
 
     // Validate input
     if ((!userInput || userInput.trim().length === 0) && (!messages || messages.length === 0)) {
@@ -24,7 +38,22 @@ Deno.serve(async (req) => {
     }
 
     // Generate AI-powered suggestions
-    const aiResponse = await generateAIResponse(userInput || getLatestUserMessage(messages), serviceType)
+    let inputText = userInput;
+    if (!inputText && messages && messages.length > 0) {
+      inputText = getLatestUserMessage(messages);
+    }
+    
+    if (!inputText || inputText.trim().length === 0) {
+      return new Response(
+        JSON.stringify({ error: 'No valid input found' }),
+        { 
+          status: 400, 
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' } 
+        }
+      );
+    }
+
+    const aiResponse = await generateAIResponse(inputText, serviceType);
 
     return new Response(
       JSON.stringify({ 
@@ -37,7 +66,7 @@ Deno.serve(async (req) => {
     )
 
   } catch (error) {
-    console.error("Project assistant error:", error)
+    console.error("Project assistant error:", error);
     return new Response(
       JSON.stringify({ error: "Failed to get AI assistance" }),
       { 
@@ -184,6 +213,43 @@ For your outdoor living space:
 Tell us more about your vision and how you plan to use the space!`
   }
   
+  // Home repair suggestions
+  if (input.includes('repair') || input.includes('fix') || serviceType === 'Home Repair') {
+    return `**Home Repair Project Analysis**
+
+For your home repair needs:
+
+**Common Repair Categories:**
+- Plumbing issues (leaks, clogs, fixture replacement)
+- Electrical problems (outlets, switches, lighting)
+- HVAC maintenance and repairs
+- Roofing and gutter issues
+- Drywall and paint touch-ups
+- Flooring repairs and replacement
+
+**Assessment Questions:**
+- Is this an emergency repair or planned maintenance?
+- How long has the issue been present?
+- Have you noticed any related problems?
+
+**Safety Considerations:**
+- Electrical and plumbing work may require permits
+- Some repairs need immediate attention to prevent damage
+- Professional assessment recommended for structural issues
+
+**Timeline Expectations:**
+- Emergency repairs: Same day to 48 hours
+- Standard repairs: 1-3 days
+- Complex repairs: 1-2 weeks
+
+**Local Expertise:**
+- Licensed professionals for electrical/plumbing
+- Knowledge of local building codes
+- Quality materials suited for SC climate
+
+Please describe the specific repair issue so we can provide targeted guidance and timeline estimates.`
+  }
+  
   // General project suggestions
   return `**Project Planning Assistant**
 
@@ -199,8 +265,8 @@ Thank you for reaching out about your project. To provide the best guidance, we'
 - Bathroom Renovation  
 - Home Additions
 - Outdoor Living Spaces
+- Home Repair
 - Whole Home Renovation
-- Home Repairs
 
 **Next Steps:**
 Please provide more details about your specific project goals, and we'll help you create a comprehensive project description that covers all the important considerations.
