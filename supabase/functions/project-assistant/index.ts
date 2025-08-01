@@ -90,6 +90,58 @@ function getLatestUserMessage(messages: any[]): string {
 }
 
 async function generateAIResponse(userInput: string, serviceType?: string): Promise<string> {
+  try {
+    const openaiApiKey = Deno.env.get('OPENAI_API_KEY');
+    
+    if (!openaiApiKey) {
+      console.error('OpenAI API key not found in environment variables');
+      return getFallbackResponse(userInput, serviceType);
+    }
+
+    const systemPrompt = `You are a helpful assistant for Upcountry Contractors, a home improvement company serving the Greenville and Spartanburg areas in South Carolina. Provide detailed, professional advice for home improvement projects. Focus on practical considerations, timelines, and local factors.`;
+    
+    const userPrompt = serviceType 
+      ? `Service Type: ${serviceType}\nUser Input: ${userInput}`
+      : userInput;
+
+    const response = await fetch('https://api.openai.com/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${openaiApiKey}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        model: 'gpt-3.5-turbo',
+        messages: [
+          { role: 'system', content: systemPrompt },
+          { role: 'user', content: userPrompt }
+        ],
+        max_tokens: 500,
+        temperature: 0.7,
+      }),
+    });
+
+    if (!response.ok) {
+      console.error('OpenAI API error:', response.status, response.statusText);
+      return getFallbackResponse(userInput, serviceType);
+    }
+
+    const data = await response.json();
+    
+    if (data.choices && data.choices[0] && data.choices[0].message) {
+      return data.choices[0].message.content;
+    } else {
+      console.error('Unexpected OpenAI response format:', data);
+      return getFallbackResponse(userInput, serviceType);
+    }
+    
+  } catch (error) {
+    console.error('Error calling OpenAI API:', error);
+    return getFallbackResponse(userInput, serviceType);
+  }
+}
+
+function getFallbackResponse(userInput: string, serviceType?: string): string {
   const input = userInput.toLowerCase()
   
   // Kitchen remodeling suggestions
